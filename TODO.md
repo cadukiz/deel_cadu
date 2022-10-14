@@ -1,9 +1,7 @@
-# Example of TODO.md
-
-Deel Challenge TODO.md
+# Deel Challenge TODO.md
 
 ### Todo
-- [ ] Requirements (README : https://github.com/todomd/todo.md/blob/master/TODO.md)
+- [ ] Requirements (README : https://github.com/todomd/todo.md/blob/master/README.md)
     - [ ] Item 7 
 - [ ] Transactions
 - [ ] Error Handling
@@ -13,20 +11,20 @@ Deel Challenge TODO.md
     - [ ] Repositor
     - [ ] Error Handlers
 - [ ] Performance:
-    - [ ]Pagination
-    - [ ]Concurrency
-- [ ]NTH
+    - [ ] Pagination
+    - [ ] Concurrency
+- [ ] NTH
     - [ ] Request Validation
     - [ ] Resources
     - [ ] Tests Unit / Integration
-    
+
 ### In Progress
 
 - [ ] Postman Doc: https://documenter.getpostman.com/view/3578622/2s8479ywQj
 - [ ]Organize 
     - [ ] Routes
     - [ ] Controllers
-- [ ] Requirements (README : https://github.com/todomd/todo.md/blob/master/TODO.md)
+- [ ] Requirements (README : https://github.com/todomd/todo.md/blob/master/README.md)
     - [ ] Item 6 
 
 ### Done ✓
@@ -36,7 +34,7 @@ Deel Challenge TODO.md
 - [x] ESLint
 - [x] .ENV / Configs
 - [x] Enums
-- [x] Requirements (README : https://github.com/todomd/todo.md/blob/master/TODO.md)
+- [x] Requirements (README : https://github.com/todomd/todo.md/blob/master/README.md)
     - [x] Item 1 
     - [x] Item 2 
     - [x] Item 3 

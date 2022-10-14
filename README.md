@@ -1,6 +1,11 @@
 # DEEL BACKEND TASK
 
   
+STATUS CHALLENGE (TODO : https://github.com/todomd/todo.md/blob/master/TODO.md)
+
+POSTMAN: https://documenter.getpostman.com/view/3578622/2s8479ywQj
+
+
 
 💫 Welcome! 🎉
 
@@ -123,5 +128,9 @@ It would be great for example if you'd write some unit test / simple frontend de
 When you have finished the assignment, create a github repository and send us the link.
 
   
+STATUS CHALLENGE (TODO : https://github.com/todomd/todo.md/blob/master/TODO.md)
+
 
 Thank you and good luck! 🙏
+
+Thanks to uou Deel ;-)
