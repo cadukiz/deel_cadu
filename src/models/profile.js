@@ -2,7 +2,7 @@
 const {
   Model
 } = require('sequelize')
-const { CLIENT, CONTRACTOR } = require('../enums/profileTypes')
+const { CLIENT, CONTRACTOR } = require('../enums/profile-types')
 module.exports = (sequelize, DataTypes) => {
   class Profile extends Model {
     /**

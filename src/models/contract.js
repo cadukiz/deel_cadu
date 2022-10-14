@@ -2,7 +2,7 @@
 const {
   Model
 } = require('sequelize')
-const { NEW, IN_PROGRESS, TERMINATED } = require('../enums/contractStatus')
+const { NEW, IN_PROGRESS, TERMINATED } = require('../enums/contract-status')
 module.exports = (sequelize, DataTypes) => {
   class Contract extends Model {
     /**
