@@ -13,23 +13,23 @@ This backend exercise involves building a Node.js/Express.js app that will serve
 
 ### Profile
 A profile can be either a `client` or a `contractor`. 
-clients create contracts with contractors. contractor does jobs for clients and get paid.
+Clients create contracts with contractors. Contractor does jobs for clients and get paid.
 Each profile has a balance property.
 
 ### Contract
 A contract between and client and a contractor.
-Contracts have 3 statuses, `new`, `in_progress`, `terminated`. contracts are considered active only when in status `in_progress`
+Contracts have 3 statuses, `new`, `in_progress`, `terminated`. Contracts are considered active only when in status `in_progress`.
 Contracts group jobs within them.
 
 ### Job
-contractor get paid for jobs by clients under a certain contract.
+Contractor get paid for jobs by clients under a certain contract.
 
 ## Getting Set Up
 
   
 The exercise requires [Node.js](https://nodejs.org/en/) to be installed. We recommend using the LTS version.
 
-  
+
 
 1. Start by cloning this repository.
 
@@ -60,7 +60,8 @@ The exercise requires [Node.js](https://nodejs.org/en/) to be installed. We reco
 
 - The database provider is SQLite, which will store data in a file local to your repository called `database.sqlite3`. The ORM [Sequelize](http://docs.sequelizejs.com/) is on top of it. You should only have to interact with Sequelize - **please spend some time reading sequelize documentation before starting the exercise.**
 
-- To authenticate users use the `getProfile` middleware that is located under src/middleware/getProfile.js. users are authenticated by passing `profile_id` in the request header. after a user is authenticated his profile will be available under `req.profile`. make sure only users that are on the contract can access their contracts.
+- To authenticate users use the `getProfile` middleware that is located under src/middleware/getProfile.js. Users are authenticated by passing `profile_id` in the request header. After a user is authenticated his profile will be available under `req.profile`. make sure only users that are on the contract can access their contracts.
+
 - The server is running on port 3001.
 
   
@@ -74,7 +75,7 @@ Below is a list of the required API's for the application.
   
 
 
-1. ***GET*** `/contracts/:id` - This API is broken 😵! it should return the contract only if it belongs to the profile calling. better fix that!
+1. ***GET*** `/contracts/:id` - This API is broken 😵! It should return the contract only if it belongs to the profile calling. Better fix that!
 
 1. ***GET*** `/contracts` - Returns a list of contracts belonging to a user (client or contractor), the list should only contain non terminated contracts.
 
@@ -82,11 +83,11 @@ Below is a list of the required API's for the application.
 
 1. ***POST*** `/jobs/:job_id/pay` - Pay for a job, a client can only pay if his balance >= the amount to pay. The amount should be moved from the client's balance to the contractor balance.
 
-1. ***POST*** `/balances/deposit/:userId` - Deposits money into the the the balance of a client, a client can't deposit more than 25% his total of jobs to pay. (at the deposit moment)
+1. ***POST*** `/balances/deposit/:userId` - Deposits money into the balance of a client, a client can't deposit more than 25% his total of jobs to pay. (At the deposit moment)
 
-1. ***GET*** `/admin/best-profession?start=<date>&end=<date>` - Returns the profession that earned the most money (sum of jobs paid) for any contactor that worked in the query time range.
+1. ***GET*** `/admin/best-profession?start=<date>&end=<date>` - Returns the profession that earned the most money (sum of jobs paid) for any contractor that worked in the query time range.
 
-1. ***GET*** `/admin/best-clients?start=<date>&end=<date>&limit=<integer>` - returns the clients the paid the most for jobs in the query time period. limit query parameter should be applied, default limit is 2.
+1. ***GET*** `/admin/best-clients?start=<date>&end=<date>&limit=<integer>` - Returns the clients the paid the most for jobs in the query time period. Limit query parameter should be applied, default limit is 2.
 ```
  [
     {
