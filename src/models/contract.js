@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate (models) {
-      Contract.belongsTo(models.Profile, { as: 'Contractor' })
-      Contract.belongsTo(models.Profile, { as: 'Client' })
-      Contract.hasMany(models.Job)
+      Contract.belongsTo(models.Profile, { as: 'contractor' })
+      Contract.belongsTo(models.Profile, { as: 'client' })
+      Contract.hasMany(models.Job, { foreignKey: 'contractId' })
     }
   }
   Contract.init(

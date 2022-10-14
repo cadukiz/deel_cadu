@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate (models) {
-      Job.belongsTo(models.Contract)
+      Job.belongsTo(models.Contract, { as: 'contract', foreignKey: 'contractId' })
     }
   }
   Job.init(
@@ -25,7 +25,8 @@ module.exports = (sequelize, DataTypes) => {
       },
       paid: {
         type: DataTypes.BOOLEAN,
-        default: '0'
+        defaultValue: false,
+        allowNull: false
       },
       paymentDate: {
         type: DataTypes.DATE
