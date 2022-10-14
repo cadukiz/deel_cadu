@@ -4,8 +4,8 @@ init();
 
 async function init() {
   try {
-    app.listen(3001, () => {
-      console.log('Express App Listening on Port 3001');
+    app.listen(process.env.PORT, () => {
+      console.log('Express App Listening on Port '+process.env.PORT);
     });
   } catch (error) {
     console.error(`An error occurred: ${JSON.stringify(error)}`);
