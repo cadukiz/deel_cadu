@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize')
+const { CLIENT, CONTRACTOR } = require('../enums/profileTypes')
 module.exports = (sequelize, DataTypes) => {
   class Profile extends Model {
     /**
@@ -31,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DECIMAL(12, 2)
     },
     type: {
-      type: DataTypes.ENUM('client', 'contractor')
+      type: DataTypes.ENUM(CLIENT, CONTRACTOR)
     }
   }, {
     sequelize,

@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       paid: {
         type: DataTypes.BOOLEAN,
-        default: false
+        default: '0'
       },
       paymentDate: {
         type: DataTypes.DATE

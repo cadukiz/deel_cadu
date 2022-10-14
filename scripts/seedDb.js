@@ -1,3 +1,4 @@
+const { CONTRACTOR, CLIENT } = require('../src/enums/profileTypes')
 const { Profile, Contract, Job } = require('../src/model')
 
 /* WARNING THIS WILL DROP THE CURRENT DATABASE */
@@ -16,7 +17,7 @@ async function seed () {
       lastName: 'Potter',
       profession: 'Wizard',
       balance: 1150,
-      type: 'client'
+      type: CLIENT
     }),
     Profile.create({
       id: 2,

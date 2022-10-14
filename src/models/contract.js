@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize')
+const { NEW, IN_PROGRESS, TERMINATED } = require('../enums/contractStatus')
 module.exports = (sequelize, DataTypes) => {
   class Contract extends Model {
     /**
@@ -22,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       status: {
-        type: DataTypes.ENUM('new', 'in_progress', 'terminated')
+        type: DataTypes.ENUM(NEW, IN_PROGRESS, TERMINATED)
       }
     },
     {
