@@ -1,5 +1,6 @@
 const { Op } = require('sequelize')
 const { IN_PROGRESS } = require('../enums/contract-status')
+const { sequelize } = require('../models')
 const JobService = require('../services/job')
 
 class JobController {
@@ -85,15 +86,25 @@ class JobController {
     const client = job.contract.client
     const contractor = job.contract.contractor
 
-    if (client.balance >= job.price) {
-      const clientNewBalance = client.balance - job.price
-      const contractorNewBalance = contractor.balance + job.price
-      await client.update({ balance: clientNewBalance })
-      await contractor.update({ balance: (contractorNewBalance) })
-      await job.update({ paid: true, paymentDate: new Date() })
-      return res.json(client)
-    } else {
-      return res.status(422).end()
+    let transaction
+    try {
+      transaction = await sequelize.transaction()
+
+      if (client.balance >= job.price) {
+        const clientNewBalance = client.balance - job.price
+        const contractorNewBalance = contractor.balance + job.price
+        await client.update({ balance: clientNewBalance }, { transaction })
+        await contractor.update({ balance: (contractorNewBalance) }, { transaction })
+        await job.update({ paid: true, paymentDate: new Date() }, { transaction })
+        await transaction.commit()
+        return res.json(client)
+      }
+    } catch (error) {
+      console.log('error - AdminController - Deposit' + error.name)
+      if (transaction) {
+        await transaction.rollback()
+      }
+      return res.status(422).json(error).end()
     }
   }
 }

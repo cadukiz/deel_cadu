@@ -1,6 +1,6 @@
 const { Op } = require('sequelize')
 const { CLIENT } = require('../enums/profile-types')
-const { Sequelize } = require('../models')
+const { Sequelize, sequelize } = require('../models')
 
 class AdminController {
   async bestProfession (req, res) {
@@ -130,34 +130,43 @@ class AdminController {
     const { Profile, Contract, Job } = req.app.get('models')
     const id = req.params.userId
     const value = req.body.value
-    const client = await Profile.findOne({
-      where: {
-        id,
-        type: CLIENT
-      }
-    })
-
-    const jobsSum = await Job.sum('price', {
-      where: {
-        paid: false
-      },
-      include: {
-        model: Contract,
-        as: 'contract',
+    let transaction
+    try {
+      transaction = await sequelize.transaction()
+      const client = await Profile.findOne({
         where: {
-          clientId: id
+          id,
+          type: CLIENT
+        }
+      })
+
+      const jobsSum = await Job.sum('price', {
+        where: {
+          paid: false
+        },
+        include: {
+          model: Contract,
+          as: 'contract',
+          where: {
+            clientId: id
+          }
         }
       }
+      )
+      const newBalance = client.balance + value
+      if (!jobsSum || ((newBalance) > (jobsSum * 1.25))) {
+        throw new Error('Open Values: ' + jobsSum + " . Can't be more than 25% of your open values to paid, ")
+      }
+      await client.update({ balance: (newBalance) }, { transaction })
+      await transaction.commit()
+      return res.json('Deposit has been done, new balance: ' + newBalance)
+    } catch (erro) {
+      console.log('error - AdminController - Deposit' + erro.name)
+      if (transaction) {
+        await transaction.rollback()
+      }
+      return res.status(400).json(erro.message)
     }
-    )
-    const newBalance = client.balance + value
-    if (!jobsSum || ((newBalance) > (jobsSum * 1.25))) {
-      return res.status(422).json({ error: 'Open Values: ' + jobsSum + " . Can't be more than 25% of your open values to paid, " }).end()
-    } else {
-      await client.update({ balance: (newBalance) })
-    }
-
-    return res.json('Deposit has been done. Total Balance: ' + client.balance)
   }
 }
 

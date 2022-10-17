@@ -12,8 +12,6 @@
         - [ ] Concurrency
 
 ### In Progress
-
-- [ ] Postman Doc: https://documenter.getpostman.com/view/3578622/2s8479ywQj
 - [ ] Organization:
     - [ ] Services
     - [ ] Repositories
@@ -21,11 +19,15 @@
 
 ### Done ✓
 
-- [x] Repo 
-- [x] Folder Structure Organization
-- [x] ESLint
-- [x] .ENV / Configs
-- [x] Enums
+- [x] Create Repo 
+- [x] Postman Doc/Testing : https://documenter.getpostman.com/view/3578622/2s8479ywQj
+- [X] Organization
+    - [x] ESLint
+    - [x] Folder Structure
+        - [X] Routes
+        - [X] Controllers
+    - [x] .ENV / Configs
+    - [x] Enums
 - [x] Requirements (README : https://github.com/todomd/todo.md/blob/master/README.md)
     - [x] Item 1 
     - [x] Item 2 
@@ -34,6 +36,4 @@
     - [x] Item 5 
     - [x] Item 6 
     - [x] Item 7
-- [X] Organization
-    - [X] Routes
-    - [X] Controllers
+
