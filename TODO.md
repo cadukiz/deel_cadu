@@ -1,8 +1,6 @@
 # Deel Challenge TODO.md
 
 ### Todo
-- [ ] Requirements (README : https://github.com/todomd/todo.md/blob/master/README.md)
-    - [ ] Item 7 
 - [ ] Transactions
 - [ ] Error Handling
 - [ ] Add Profile Scope toavoid code replication.
@@ -24,8 +22,6 @@
 - [ ]Organize 
     - [ ] Routes
     - [ ] Controllers
-- [ ] Requirements (README : https://github.com/todomd/todo.md/blob/master/README.md)
-    - [ ] Item 6 
 
 ### Done ✓
 
@@ -40,3 +36,5 @@
     - [x] Item 3 
     - [x] Item 4 
     - [x] Item 5 
+    - [x] Item 6 
+    - [x] Item 7
