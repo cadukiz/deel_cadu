@@ -1,7 +1,8 @@
 # Deel Challenge TODO.md
 
 ### Todo
-- [ ] Transactions
+- [ ] Organization:
+    - [ ] Repositories
 
 - [ ] NTH
     - [ ] Request / Response Validation
@@ -12,9 +13,8 @@
         - [ ] Concurrency
 
 ### In Progress
-- [ ] Organization:
+- [o] Organization:
     - [ ] Services
-    - [ ] Repositories
     - [ ] Error Handlers
 
 ### Done ✓
@@ -36,4 +36,5 @@
     - [x] Item 5 
     - [x] Item 6 
     - [x] Item 7
+- [x] Add Transaction on Client Deposit and Job Pay.
 
