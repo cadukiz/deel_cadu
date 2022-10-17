@@ -1,22 +1,5 @@
 # Deel Challenge TODO.md
 
-### Todo
-- [ ] Organization:
-    - [ ] Repositories
-
-- [ ] NTH
-    - [ ] Request / Response Validation
-    - [ ] Tests Unit / Integration
-    - [ ] Add Profile Scope to avoid code replication of getProfile rule on each endpoint.
-    - [ ] Performance:
-        - [ ] Pagination
-        - [ ] Concurrency
-
-### In Progress
-- [ ] Organization:
-    - [ ] Services
-    - [ ] Error Handlers
-
 ### Done ✓
 
 - [x] Create Repo 
@@ -36,5 +19,29 @@
     - [x] Item 5 
     - [x] Item 6 
     - [x] Item 7
+    - [x] Bonus Item 8  - Jobs List
+    - [x] Bonus Item 9  - Profile Show 
+    - [x] Bonus Item 10 - List Best Clients
 - [x] Add Transaction on Client Deposit and Job Pay.
+
+
+
+### In Progress
+- [ ] Organization:
+    - [ ] Services
+    - [ ] Error Handlers
+
+
+
+### Todo
+- [ ] Organization:
+    - [ ] Repositories
+
+- [ ] NTH (Nice to Have)
+    - [ ] Request / Response Validation
+    - [ ] Tests Unit / Integration
+    - [ ] Add Profile Scope to avoid code replication of getProfile rule on each endpoint.
+    - [ ] Performance:
+        - [ ] Pagination
+        - [ ] Concurrency
 
