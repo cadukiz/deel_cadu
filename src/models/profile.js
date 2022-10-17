@@ -24,6 +24,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    // fullName: {
+    //   type: DataTypes.VIRTUAL,
+    //   get () {
+    //     return this.firstName + ' ' + this.lastName
+    //   },
+    //   set (value) {
+    //     throw new Error('Readonly attribute')
+    //   }
+    // },
     profession: {
       type: DataTypes.STRING,
       allowNull: false

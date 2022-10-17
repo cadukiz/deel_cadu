@@ -197,10 +197,50 @@ app.get('/admin/best-profession', async (req, res) => {
   const endDate = new Date(req.query.endDate)
   endDate.setDate(endDate.getDate() + 1)
 
+  const professions = await Profile.findOne({
+    subQuery: false,
+    attributes: ['profession', [Sequelize.fn('SUM', Sequelize.col('contractor.jobs.price')), 'sumJobs']],
+    include: {
+      model: Contract,
+      as: 'contractor',
+      required: true,
+      attributes: [],
+      include: {
+        model: Job,
+        as: 'jobs',
+        required: true,
+        attributes: [],
+        where: {
+          paid: true,
+          paymentDate: {
+            [Op.gte]: startDate,
+            [Op.lt]: endDate
+          }
+
+        }
+      }
+    },
+    limit: 1,
+    group: ['profession'],
+    order: [['sumJobs', 'DESC']]
+  }
+
+  )
+  if (!professions) {
+    return res.status(200).json({}).end()
+  }
+  return res.json(professions.profession)
+})
+
+app.get('/admin/best-contractors', async (req, res) => {
+  const { Profile, Contract, Job } = req.app.get('models')
+  const startDate = new Date(req.query.startDate)
+  const endDate = new Date(req.query.endDate)
+  endDate.setDate(endDate.getDate() + 1)
+
   const profiles = await Profile.findAll({
     attributes: {
-      include:
-      [[Sequelize.fn('SUM', Sequelize.col('contractor.jobs.price')), 'sumJobs']]
+      include: [[Sequelize.fn('SUM', Sequelize.col('contractor.jobs.price')), 'sumJobs']]
     },
     include: {
       model: Contract,
@@ -224,6 +264,50 @@ app.get('/admin/best-profession', async (req, res) => {
     },
     group: ['contractor.contractorId'],
     order: [['sumJobs', 'DESC']]
+  }
+
+  )
+  return res.json(profiles)
+})
+
+app.get('/admin/best-clients', async (req, res) => {
+  const { Profile, Contract, Job } = req.app.get('models')
+  const startDate = new Date(req.query.startDate)
+  const limit = (req.query.limit || 2)
+  const endDate = new Date(req.query.endDate)
+  endDate.setDate(endDate.getDate() + 1)
+
+  const profiles = await Profile.findAll({
+    subQuery: false,
+    attributes: ['id',
+      // DataType.VIRTUAL used on Profile, but don't work without bring first and LastName :-)
+      [Sequelize.literal("firstName || ' ' || lastName"), 'fullName'],
+      [Sequelize.fn('SUM', Sequelize.col('client.jobs.price')), 'paid']
+    ],
+
+    include: {
+      model: Contract,
+      as: 'client',
+      required: true,
+      attributes: [],
+      include: {
+        model: Job,
+        as: 'jobs',
+        required: true,
+        attributes: [],
+        where: {
+          paid: true,
+          paymentDate: {
+            [Op.gte]: startDate,
+            [Op.lt]: endDate
+          }
+
+        }
+      }
+    },
+    group: ['client.clientId'],
+    order: [['paid', 'DESC']],
+    limit
   }
 
   )
