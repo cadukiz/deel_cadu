@@ -2,12 +2,7 @@
 
 ### Todo
 - [ ] Transactions
-- [ ] Error Handling
-- [ ] Add Profile Scope toavoid code replication.
-- [ ] Organization:
-    - [ ] Services
-    - [ ] Repositor
-    - [ ] Error Handlers
+
 - [ ] Performance:
     - [ ] Pagination
     - [ ] Concurrency
@@ -15,13 +10,15 @@
     - [ ] Request Validation
     - [ ] Resources
     - [ ] Tests Unit / Integration
+    - [ ] Add Profile Scope to avoid code replication of getProfile rule on each endpoint.
 
 ### In Progress
 
 - [ ] Postman Doc: https://documenter.getpostman.com/view/3578622/2s8479ywQj
-- [ ]Organize 
-    - [ ] Routes
-    - [ ] Controllers
+- [ ] Organization:
+    - [ ] Services
+    - [ ] Repositor
+    - [ ] Error Handlers
 
 ### Done ✓
 
@@ -38,3 +35,6 @@
     - [x] Item 5 
     - [x] Item 6 
     - [x] Item 7
+- [X]Organization
+    - [X] Routes
+    - [X] Controllers
