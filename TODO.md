@@ -13,7 +13,7 @@
         - [ ] Concurrency
 
 ### In Progress
-- [o] Organization:
+- [ ] Organization:
     - [ ] Services
     - [ ] Error Handlers
 
