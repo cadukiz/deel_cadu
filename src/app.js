@@ -1,10 +1,11 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const { sequelize } = require('./models')
+const { Sequelize } = require('./models')
 const { getProfile } = require('./middleware/getProfile')
-const { Op } = require('sequelize')
 const { IN_PROGRESS } = require('./enums/contract-status')
 const { CLIENT } = require('./enums/profile-types')
+const { Op } = require('sequelize')
 
 const app = express()
 app.use(bodyParser.json())
@@ -145,8 +146,10 @@ app.post('/jobs/:job_id/pay', getProfile, async (req, res) => {
   const contractor = job.contract.contractor
 
   if (client.balance >= job.price) {
-    await client.update({ balance: (client.balance - job.price).toFixed(2) })
-    await contractor.update({ balance: (contractor.balance + job.price).toFixed(2) })
+    const clientNewBalance = client.balance - job.price
+    const contractorNewBalance = contractor.balance + job.price
+    await client.update({ balance: clientNewBalance })
+    await contractor.update({ balance: (contractorNewBalance) })
     await job.update({ paid: true, paymentDate: new Date() })
     return res.json(client)
   } else {
@@ -189,21 +192,42 @@ app.post('/balances/deposit/:userId', async (req, res) => {
 })
 
 app.get('/admin/best-profession', async (req, res) => {
-  const { Contract, Job } = req.app.get('models')
+  const { Profile, Contract, Job } = req.app.get('models')
+  const startDate = new Date(req.query.startDate)
+  const endDate = new Date(req.query.endDate)
+  endDate.setDate(endDate.getDate() + 1)
 
-  const jobs = await Job.findAll({
-    where: {
-      paid: true
+  const profiles = await Profile.findAll({
+    attributes: {
+      include:
+      [[Sequelize.fn('SUM', Sequelize.col('contractor.jobs.price')), 'sumJobs']]
     },
     include: {
       model: Contract,
-      as: 'contract',
-      include: ['client']
-    }
+      as: 'contractor',
+      required: true,
+      attributes: [],
+      include: {
+        model: Job,
+        as: 'jobs',
+        required: true,
+        attributes: [],
+        where: {
+          paid: true,
+          paymentDate: {
+            [Op.gte]: startDate,
+            [Op.lt]: endDate
+          }
+
+        }
+      }
+    },
+    group: ['contractor.contractorId'],
+    order: [['sumJobs', 'DESC']]
   }
 
   )
-  return res.json(jobs)
+  return res.json(profiles)
 })
 
 module.exports = app

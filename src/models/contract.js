@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate (models) {
       Contract.belongsTo(models.Profile, { as: 'contractor' })
       Contract.belongsTo(models.Profile, { as: 'client' })
-      Contract.hasMany(models.Job, { foreignKey: 'contractId' })
+      Contract.hasMany(models.Job, { as: 'jobs', foreignKey: 'contractId' })
     }
   }
   Contract.init(
