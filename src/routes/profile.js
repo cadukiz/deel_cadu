@@ -1,15 +1,9 @@
 const express = require('express')
+const ProfileController = require('../controllers/profile')
 const { getProfile } = require('../middleware/getProfile')
 const router = express.Router()
 
-router.get('/:id', getProfile, async (req, res) => {
-  const id = req.params.id
-  const { Profile } = req.app.get('models')
-  const profile = await Profile.findAll({
-    where: {
-      id
-    }
-  })
-  res.json(profile)
-})
+const profileController = new ProfileController()
+
+router.get('/:id', getProfile, profileController.index)
 module.exports = router
